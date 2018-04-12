@@ -35,7 +35,7 @@ Lib1 file1.fastq file2.fastq insertsize sizeerror orientation
 You will have to specify the aligner (use `bowtie`), the insert size, the tolerable error for the insert size, and the orientation. Once you’ve made the library file, run `SSPACE` with the command below, which you will have to edit according to your exiting file names and your output name preference. A description of what each flag is doing follows the command.
 
 ```
-SSPACE_Standard_v3.0.pl -l libraryfile -s minia_out.contigs.fa -z 100 -v 1 -p 1 -b output_scaffold_prefix
+SSPACE_Basic_v2.0.pl -l libraryfile -s minia_out.contigs.fa -z 100 -v 1 -p 1 -b output_scaffold_prefix
 ```
 
 * `-l` specifies the library file
@@ -45,7 +45,7 @@ SSPACE_Standard_v3.0.pl -l libraryfile -s minia_out.contigs.fa -z 100 -v 1 -p 1 
 * `-v` sets verbose output
 * `-b` sets the base file name for the output directory and the files in it.
 
-After the command runs, `cd` into the directory it created, and open the summary file. Record how many scaffolds there are “After scaffolding”, the max scaffold size, and the N50. (This is also where you can get those numbers for your original contig file, under “Inserted contig file”).
+After the command runs, open the summary file it created. Record how many scaffolds there are “After scaffolding”, the max scaffold size, and the N50. (This is also where you can get those numbers for your original contig file, under “Inserted contig file”).
 
 ## 9. Clean up original shortjump read files, see if scaffolding improves
 
