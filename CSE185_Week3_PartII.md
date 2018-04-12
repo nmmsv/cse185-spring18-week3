@@ -57,7 +57,7 @@ Use sickle to trim both short jump files. Since the read length is small to begi
 sickle pe -options -f file1.fastq -r file2.fastq -o trimmedfile1.fastq -p trimmedfile2.fastq
 ```
 
-Run fastqc on the trimmed files and get an image of the per base quality figure for your lab report. Run `SSPACE` again, this time using the trimmed data in the library file. Be sure to choose a new output prefix so that you don’t lose your original results. 
+Run `SSPACE` again, this time using the trimmed data in the library file. Be sure to choose a new output prefix so that you don’t lose your original results. 
 
 Examine the summary file and again record the number of scaffolds, the max scaffold length, and the N50. Which scaffolding was better? The one with the raw data, or the one with the trimmed data?
 
