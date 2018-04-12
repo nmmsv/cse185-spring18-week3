@@ -183,9 +183,6 @@ jellyfish histo 31corrected > 31corrected.histo
 Use Python again to make a PDF of the histogram, and include both pdfs (before and after correction) in
 your lab report. 
 
-Run `fastqc` on the corrected files and compare the results to the initial report. Include the per-base
-sequence quality in your lab report. 
-
 ## 5. Collect data on corrected reads, calculate genome size
 
 Use `wc -l` on the corrected fastq files to see how many reads are left. 
@@ -214,7 +211,7 @@ Genome_size = T/N
 
 (N: Depth of coverage, M: Kmer peak, K: Kmer-size, L: avg readlength T: Total bases)
 
-Record the genome size, as we will use it during contig assembly. 
+Record the genome size, as we will use later it during contig assembly. 
 
 ## 6. Assemble reads with minia
 
@@ -233,15 +230,14 @@ output prefix you like.
 know that a kmer of 31 produces a defined ‘true-reads’ peak, and we know where the valley is. 
 
 However, other kmers may results in better assemblies. Find at least two partners to share data with,
-and between you, try the minia assembly with kmer values between 27 and 43, as well as 31. Minia
-takes a long time, so each person can only use one kmer size. One person in the group must use
+and between you, try the minia assembly with kmer values between 27 and 43, as well as 31. One person in the group must use
 kmer size 31.
 
 For the other k-mer sizes, use the two jelly fish commands to make a histogram and find out if the
 ‘valley point’ has changed. For the minia command, you only want to use k-mers with abundance
 higher than this valley point. 
 
-```shell
+```
 minia \
   -in correctedlist \
   -kmer-size kmer_size \
@@ -249,10 +245,7 @@ minia \
   -out outprefix
 ```
 
-This command will take about 15 minutes, but it has very verbose output, so you should be able to
-see it continually chugging along. While you’re waiting, answer the <font color="blue">i>Clicker question.</font>
-As your results come in, add them to the spread sheet on the board. For your lab report, you will
-make a plot of kmer size vs assembly success (I’ll summarize the data you need next time). You will be
+As your results come in, add them to the spread sheet on the board. For your lab report, you will make a plot of kmer size vs assembly success (We’ll summarize and post the data you need next time). You will be
 performing additional analysis on either your assembly or the best assembly from your group. 
 
 ## 7. Analyze your contigs
