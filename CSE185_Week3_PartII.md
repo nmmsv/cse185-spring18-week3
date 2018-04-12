@@ -72,7 +72,23 @@ want to do quality trimming on the original files. You will have to `mv` the ori
 ## 11. Evaluate your assembly
 Even though we were unable to link every stretch of DNA together into a finished genome, we were still able to produce lots of sequences, which could be used for gene finding, comparison to related  bacteria, or as a guide for designing additional sequencing projects to fill in the gaps and link the remaining contigs. 
 
-For today, since we are using raw data from a genome that is actually already solved, we can align
-our contigs to that reference to evaluate our de novo assembly performance. Remember, if we were
-trying to solve the genome of a new or unknown organism, we wouldn’t be able to do this, but we
-could try using a close relative.
+For today, since we are using raw data from a genome that is actually already solved, we can align our contigs to that reference to evaluate our de novo assembly performance. Remember, if we were trying to solve the genome of a new or unknown organism, we wouldn’t be able to do this, but we could try using a close relative.
+
+The NCBI id of the Staphylococcus aureus strain used here is NC_010079. Download the fasta file from NCBI to your desktop, and use secure copy to transfer the `*gapfilled.final.fa` file (which contains your final, scaffolded, de novo assembly) to the desktop. 
+
+Go to QUAST again (http://quast.bioinf.spbau.ru). 
+
+First, make extra certain that you will get an email report. On the right hand side, type in your email and click ‘get personal page’. Close the QUAST tab, then wait for the email to arrive. Click on the “Personal Page” link, and perform your analysis there in order to get the results emailed. 
+
+Use quast to align your scaffolds to the actual reference sequence of the bacterial strain used to generate the original data.
+
+* Use “Add Files” to upload your assembly. 
+* Check the “scaffolds” and “find genes” boxes, and the “Prokaryotic” button. 
+* Under genome, check “another genome” and fill in the name. Under “Reference” upload the fasta file you downloaded from the NCBI. 
+* Type in a title for this analysis under caption, then click evaluate. 
+
+While you are waiting for the results, set up one additional analysis. For this, we will use the genome of the Staphylococcus aureus type strain, which is annotated (it has all the genes marked and identified) in NCBI. Search for Staphylococcus aureus at NCBI, and select the single “genome” result that shows up. 
+
+At the very top of the page are download links. Click ‘genome’ under ‘download sequences in fasta format’, and also click ‘GFF’ under ‘download genome annotation’ to download these files. Run quast again, but this time align your scaffolds to the ‘type strain’ official reference sequence, and include the GFF file under genes. Once you click evaluate, it may take a while to run.
+
+You will use both reports to answer specific questions for your lab report, but you don’t have to wait for the results before you leave. You do not have to paste a screen shot of the entire QUAST list of numbers, but do take a screen shot of the icaraus: contig browser (link at top left of report) showing your entire assembly aligned to each reference. (show the entire length, not the zoomed in portion).
