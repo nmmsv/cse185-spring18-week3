@@ -19,9 +19,9 @@ Fortunately, we can use a second set of DNA sequencing data to help us figure ou
 
 If the forward member of a pair binds to one contig, and its reverse partner binds to a different contig, we know that those positions must be ~3500 bp apart in the actual genome. By combining all of the mapping data from these pairs, scaffolding software can figure out the optimal, correct way to link the contigs together.
 
-You will use the program SSPACE for scaffolding. First, it will use the `bowtie` aligner (within the program) to map the shortjump reads to your `minia` contigs. Then, it will use those mapping results to connect the contigs into bigger scaffolds. Today you will generate a lot of new files, so make a subdirectory in your `week4` folder called “Thursday.” (no need to commit these files to github). Copy the `contig.fa` file from minia to this subdirectory. Also, move the `shortjump_1` and `shortjump_2` files to this directory. 
+You will use the program `SSPACE` for scaffolding. First, it will use the `bowtie` aligner (within the program) to map the shortjump reads to your `minia` contigs. Then, it will use those mapping results to connect the contigs into bigger scaffolds. Today you will generate a lot of new files, so make a subdirectory in your `week4` folder called “Thursday.” (no need to commit these files to github). Copy the `contig.fa` file from minia to this subdirectory. Also, move the `shortjump_1` and `shortjump_2` files to this directory. 
 
-SSPACE requires a library file, telling the program the names of our `short_jump` files and some other information about them. Use `emacs` to create a new file with the general format below. You will have tolook at the SSPACE user manual to figure out exactly what each column means. 
+`SSPACE` requires a library file, telling the program the names of our `short_jump` files and some other information about them. Use `emacs` to create a new file with the general format below. You will have to look at the SSPACE user manual to figure out exactly what each column means. 
 
 ```
 emacs sspace_library
