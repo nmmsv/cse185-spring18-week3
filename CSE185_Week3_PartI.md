@@ -52,3 +52,11 @@ git add .gitignore
 git commit -a -m"Adding gitignore file to the repository"
 git push
 ```
+
+<blockquote>
+**UNIX TIP**: Save your work frequently! It is a good idea to type "ctrl-x ctrl-s" (if using Emacs) often (I do it subconsciously) to make sure you don't lose your work. If you are using Emacs and by chance forgot to save your work before exiting, you can often find the unsaved changes in a temporary file ending with a "~" in the same directory.
+</blockquote>
+
+<blockquote>
+**UNIX/GIT TIP**: If you make changes to your lab notebook or report directly from the web browser, and want to update your local repository on `ieng6` with those changes, you can use "git pull" to see the updates.
+</blockquote>
