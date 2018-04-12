@@ -46,3 +46,19 @@ SSPACE_Standard_v3.0.pl -l libraryfile -s minia_out.contigs.fa -z 100 -v 1 -p 1 
 * `-b` sets the base file name for the output directory and the files in it.
 
 After the command runs, `cd` into the directory it created, and open the summary file. Record how many scaffolds there are “After scaffolding”, the max scaffold size, and the N50. (This is also where you can get those numbers for your original contig file, under “Inserted contig file”).
+
+## 9. Clean up original shortjump read files, see if scaffolding improves
+
+In next generation sequence analysis, we often have to make a choice between using as much data as possible, or using only the cleanest, highest quality data. The scaffolding we just performed used our raw short jump files, which we know have a lot of low quality base calls. In this section, you’ll clean up the short jump reads with quality trimming, then try the scaffolding again. 
+
+Use sickle to trim both short jump files. Since the read length is small to begin with (only 37 basepairs), set a minimum length for the output files, so that you don’t have a bunch of tiny 3- or 4-mers after filtering, which would be impossible to correctly align. (You want at least 20, but you can choose higher) Type `sickle pe` into terminal to bring up the list of options and figure out how to do this. 
+
+```
+sickle pe -options -f file1.fastq -r file2.fastq -o trimmedfile1.fastq -p trimmedfile2.fastq
+```
+
+Run fastqc on the trimmed files and get an image of the per base quality figure for your lab report. Run `SSPACE` again, this time using the trimmed data in the library file. Be sure to choose a new output prefix so that you don’t lose your original results. 
+
+Examine the summary file and again record the number of scaffolds, the max scaffold length, and the N50. Which scaffolding was better? The one with the raw data, or the one with the trimmed data?
+
+## 10. Try to close the gaps in the scaffolds. 
