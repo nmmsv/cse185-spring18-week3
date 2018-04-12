@@ -1,5 +1,5 @@
 # Week 4: Where do all these reference sequences come from, anyway? (part 1)
-Skills covered: contig assembly, scaffolding, assembly evaluation, plotting, tool installation
+Skills covered: contig assembly, scaffolding, assembly evaluation, plotting
 
 Today, you will assemble next generation sequencing reads into a complete genome. On Thursday,
 you will compare your genome to that of closely related species, and evaluate it against the published
