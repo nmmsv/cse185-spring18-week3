@@ -118,7 +118,7 @@ Now load the data and create a histogram. Note there are many resources online t
 ```python
 plt.figure()
 r31 = pd.read_csv("31.histo", sep=" ", names=["kmercount", "number"])
-plt.bar(r31.iloc[0:100,]["kmercount"], r31.iloc[0:100,]["number"]);
+plt.bar(r31.iloc[1:100,]["kmercount"], r31.iloc[1:100,]["number"]);
 plt.show()
 plt.savefig("frag_1_31.pdf")
 ```
@@ -126,4 +126,60 @@ plt.savefig("frag_1_31.pdf")
 Exit Ipython by typing `ctrl-D` and answering `y` to the prompt asking if you want to exit. When you exit, you should see a pdf file in your working directory. Use `scp` to open it on your desktop; save it for your lab report, and answer the IClicker question.
 
 Reopen the actual `.histo` file with cat, and find the bin (“number of times that k-mer appears”) that
-corresponds to small valley in the figure. Record this “initial valley point” in your lab notebook. 
+corresponds to small valley in the figure. Record this “initial valley point” in your lab notebook and answer the IClicker question.
+
+## 4.  K-mer based error correction
+
+K-mer based error correction takes advantage of the fact that our data has a relatively high depth of
+coverage. For each of the low frequency kmers (likely errors, therefore untrustworthy), the software
+will try to find similar high-frequency k-mers that are only one or two mutations away, and ‘correct’ the
+read with the untrustworthy k-mer so that we can still use it in assembly. 
+
+We are going to use error correction modules from SOAPdenovo2 (SOAP = “Short Oligonucleotide
+Alignment Program). SOAP has been around since the dawn of next-generation sequencing (the
+original paper, published in 2008, has been cited 1372 times), and this error correction module is from
+2012. 
+
+Run error correction on the `frag_1.fastq` and `frag_2.fastq` files together. Here, we will use the maximum k-mer size allowed by the software, which is 27. The two commands below use a file that contains a list of the files to correct. Use emacs or your favorite text editor to make this list file, with the files (`frag_1.fastq` and `frag_2.fastq`) each listed on separate lines. 
+
+```
+emacs filelist
+```
+
+After you type in the file names, type `ctrl-x ctrl-s` to save and `ctrl-x ctrl-c` to exit.
+
+First run the `Kmer_FreqHA` command, which is part of the `SOAPdenovo2` package. Check the
+commands usage page to figure out how to set the `-L` option. Replace the prefix with something
+memorable, like "corrected":
+
+```shell
+KmerFreq_HA -k 27 -L NNN -i 10000000 -p prefix -l yourlist
+```
+
+This command will take about 5-6 minutes to run. It is generating the frequency of every k-mer in our
+data, then creating a hash-table to make them easier to access. When the command completes, run
+the corrector command shown below which actually corrects our reads.
+
+*Edit the corrector command* so that `-l` corresponds to the “valley point” in your k=31 kmer histogram.
+You can double check with us if you are unsure. 
+
+```shell
+Corrector_HA -k 27 -Q 33 -o 3 -l N prefix.freq.gz yourlist
+```
+
+This command will also take 5-6 minutes to run. When it is complete, inspect your working directory.
+There should be several new output files, the ones we are interested in end in `*cor.pair_N.fq`. These
+are the corrected fastq files, and we will use them for our assembly. 
+
+First, use jellyfish to see how the distribution of k-mers is different in the corrected data:
+
+```shell
+jellyfish count -m 31 -s 10000000 -o 31corrected -C frag_1.fastq.cor.pair_1.fq
+jellyfish histo 31corrected > 31corrected.histo 
+```
+
+Use Python again to make a PDF of the histogram, and include both pdfs (before and after correction) in
+your lab report. Answer the <font color="blue">i>Clicker question</font>.
+
+Run `fastqc` on the corrected files and compare the results to the initial report. Include the per-base
+sequence quality in your lab report. 
