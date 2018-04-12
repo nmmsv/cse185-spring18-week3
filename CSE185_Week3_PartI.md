@@ -26,7 +26,9 @@ git clone https://github.com/cse185-sp18/cse185-week2-<username>.git week3
 cp ../public/week3/*.fastq week3/
 ```
 
-The data for this week's lab is in the `public/week3` and consists of four fastq files (`frag_1.fastq`, `frag_2.fastq`, `short_jump_1.fastq`, `short_jump_2.fastq`). Use `wc -l` to determine the number of reads in each raw data file. Record it in your notebook. Then run `fastqc` on all four of the fastq files. As in previous labs, use `scp` to retrieve the html files and save screenshots of the per base read quality for each file.
+The data for this week's lab is in the `public/week3` and consists of four fastq files (`frag_1.fastq`, `frag_2.fastq`, `short_jump_1.fastq`, `short_jump_2.fastq`). Copy these to your `week3` directory (copying fastq files is not generally a good practice, but some of the tools we'll run today require the files to be in a directory where you have write permissions.)
+
+Use `wc -l` to determine the number of reads in each raw data file. Record it in your notebook. Then run `fastqc` on all four of the fastq files. As in previous labs, use `scp` to retrieve the html files and save screenshots of the per base read quality for each file.
 
 Wow! That data is pretty bad. We will use a k-mer based approach to error correction to clean up the
 small insert library (`frag_1.fastq` & `frag_2.fastq`). You’ll explore the k-mer distribution in the next
@@ -82,7 +84,7 @@ length in our data. The `jellyfish count` command takes the following options:
 Run the command below on the `frag_1` data. Use a k-mer sizes of 31.
 
 ```shell
-jellyfish count -m 31 -s 10000000 -o 31 -C ../../public/week3/frag_1.fastq 
+jellyfish count -m 31 -s 10000000 -o 31 -C frag_1.fastq 
 ```
 
 This might take a while. You can get started on the recommended reading while you're waiting.
@@ -140,7 +142,7 @@ Alignment Program). SOAP has been around since the dawn of next-generation seque
 original paper, published in 2008, has been cited 1372 times), and this error correction module is from
 2012. 
 
-Run error correction on the `frag_1.fastq` and `frag_2.fastq` files together. Here, we will use the maximum k-mer size allowed by the software, which is 27. The two commands below use a file that contains a list of the files to correct. Use emacs or your favorite text editor to make this list file, with the files (`frag_1.fastq` and `frag_2.fastq`, but you'll need the full paths to these since they aren't in your current directory) each listed on separate lines. 
+Run error correction on the `frag_1.fastq` and `frag_2.fastq` files together. Here, we will use the maximum k-mer size allowed by the software, which is 27. The two commands below use a file that contains a list of the files to correct. Use emacs or your favorite text editor to make this list file, with the files (`frag_1.fastq` and `frag_2.fastq`) each listed on separate lines. 
 
 ```
 emacs filelist
@@ -179,7 +181,7 @@ jellyfish histo 31corrected > 31corrected.histo
 ```
 
 Use Python again to make a PDF of the histogram, and include both pdfs (before and after correction) in
-your lab report. Answer the <font color="blue">i>Clicker question</font>.
+your lab report. 
 
 Run `fastqc` on the corrected files and compare the results to the initial report. Include the per-base
 sequence quality in your lab report. 
