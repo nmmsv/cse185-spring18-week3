@@ -60,3 +60,36 @@ git push
 <blockquote>
 **UNIX/GIT TIP**: If you make changes to your lab notebook or report directly from the web browser, and want to update your local repository on `ieng6` with those changes, you can use "git pull" to see the updates.
 </blockquote>
+
+
+## 2. Use jellyfish to make k-mer histograms for the "frag" library
+
+We will be using the `frag_1` and `frag_2` fastq files to assemble our genome, and we will be using a de
+Bruijn graph strategy, which breaks the reads up into k-mers to facilitate assembly of correctly
+connected contigs. 
+
+The size and type of these k-mers are important parameters in de novo assembly, so in this section
+you will spend some time looking at how k-mers are distributed in our data. For this purpose it’s OK to only analyze the forward fragment (fragment 1). 
+
+*Jellyfish* is a kmer counting program that will count the frequency of all possible k-mers of a given
+length in our data. The `jellyfish count` command takes the following options:
+
+* `-m` specifies the length
+* `-C` tells it to ignore directionality (it treats each read the same as its reverse complement)
+* `-s` is an initial estimate for the size of the hash table jellyfish uses, set > genome size
+* `-o` specifies the name of the output file. choose a name with the k-mer length in it
+
+Run the command below on the `frag_1` data. Use a k-mer sizes of 31.
+
+```shell
+jellyfish count -m 31 -s 10000000 -o 31 -C ../../public/week3/frag_1.fastq 
+```
+
+Run the command below to make a histogram file. 
+```shell
+jellyfish histo 31 > 31.histo
+```
+
+Cat the histo files and take a look. On the left is a list of the bins (the number of times a k-mer occurs
+or its ‘depth’), and on the right is the count for the number of k-mers in the data that fit into that
+category. 
