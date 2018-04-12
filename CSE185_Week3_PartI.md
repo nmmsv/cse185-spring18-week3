@@ -140,13 +140,13 @@ Alignment Program). SOAP has been around since the dawn of next-generation seque
 original paper, published in 2008, has been cited 1372 times), and this error correction module is from
 2012. 
 
-Run error correction on the `frag_1.fastq` and `frag_2.fastq` files together. Here, we will use the maximum k-mer size allowed by the software, which is 27. The two commands below use a file that contains a list of the files to correct. Use emacs or your favorite text editor to make this list file, with the files (`frag_1.fastq` and `frag_2.fastq`) each listed on separate lines. 
+Run error correction on the `frag_1.fastq` and `frag_2.fastq` files together. Here, we will use the maximum k-mer size allowed by the software, which is 27. The two commands below use a file that contains a list of the files to correct. Use emacs or your favorite text editor to make this list file, with the files (`frag_1.fastq` and `frag_2.fastq`, but you'll need the full paths to these since they aren't in your current directory) each listed on separate lines. 
 
 ```
 emacs filelist
 ```
 
-After you type in the file names, type `ctrl-x ctrl-s` to save and `ctrl-x ctrl-c` to exit.
+After you type in the file names, type `ctrl-x ctrl-s` to save and `ctrl-x ctrl-c` to exit. You may want to add this file to your "gitignore" file so it won't be tracked by git.
 
 First run the `Kmer_FreqHA` command, which is part of the `SOAPdenovo2` package. Check the
 commands usage page to figure out how to set the `-L` option. Replace the prefix with something
