@@ -247,7 +247,7 @@ minia \
 
 ## 7. Analyze your contigs
 
-Examine your (own) assembly. The most important file minia created is the `\*.contigs.fa` file, which is a
+Examine your (own) assembly. The most important file minia created is the `*.contigs.fa` file, which is a
 list of each assembled contigs in fasta format. Use head to look at the first few contigs, then use the commands below to gather some basic statistics on how `minia` did. How many contigs are there? (Fasta files have 2 lines per sequence). Record the answer in your notebook. 
 
 ```
@@ -258,7 +258,7 @@ What is the longest contig? The shortest? This command will get you one of them,
 the other, and record both in your notebook. 
 
 ```
-cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | head 
+cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -n | head 
 ```
 
 <div class="alert alert-block alert-info">
@@ -266,23 +266,21 @@ cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | head
 </div>
 
 ```
-cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | min 1 max 1
+cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | datamash min 1 max 1
 ```
 
-What is the distribution of cotigs? 
+As your results come in, add them to the spread sheet on the board. For your lab report, you will make a plot of kmer size vs assembly success (We’ll summarize and post the data you need next time). You will be performing additional analysis on either your assembly or the best assembly from your group. 
+
+What is the distribution of contig lengths? 
 
 ```
 cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | uniq -c > contiglengths.histo
 ```
 
-As your results come in, add them to the spread sheet on the board. For your lab report, you will make a plot of kmer size vs assembly success (We’ll summarize and post the data you need next time). You will be
-performing additional analysis on either your assembly or the best assembly from your group. 
-
-
 Use Python to plot the histogram. Use `scp` to take a look at the pdf. Many of the contigs are very small, but a few are quite long. 
 
 Use a web tool, called QUAST (QUality ASsesment Tool for genome assemblies) to get some more
-metrics on your contigs. First, use `scp` to transfer the `\*contgs.fa` file to your desktop. Then go to  http://quast.bioinf.spbau.ru and follow these steps:
+metrics on your contigs. First, use `scp` to transfer the `*contgs.fa` file to your desktop. Then go to  http://quast.bioinf.spbau.ru and follow these steps:
 
 * Upload your contig file, and type 100 in the “skip contigs shorter than” box. 
 * Check find genes (prokaryotic).
