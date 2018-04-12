@@ -92,3 +92,40 @@ While you are waiting for the results, set up one additional analysis. For this,
 At the very top of the page are download links. Click ‘genome’ under ‘download sequences in fasta format’, and also click ‘GFF’ under ‘download genome annotation’ to download these files. Run quast again, but this time align your scaffolds to the ‘type strain’ official reference sequence, and include the GFF file under genes. Once you click evaluate, it may take a while to run.
 
 You will use both reports to answer specific questions for your lab report, but you don’t have to wait for the results before you leave. You do not have to paste a screen shot of the entire QUAST list of numbers, but do take a screen shot of the icaraus: contig browser (link at top left of report) showing your entire assembly aligned to each reference. (show the entire length, not the zoomed in portion).
+
+## For your lab report:
+*Abstract*: remember our goal this week isn’t to answer a scientific question, but to demonstrate a de
+novo assembly pipeline. Be sure to state what you did and why, and state your overall result.
+
+*Intro*: Include some background information about why de novo assembly is used and the types of
+situations where it can have a significant impact. Briefly summarize the data you are using in this
+study (what organism is it from, why are we using it, how the library is set up). 
+
+*Methods*: Summarize each step of the analysis, and be sure to include non default parameters and
+awk scripts. 
+
+*Results:*
+You will have a lot of figures (the fastqc output, histogram plots, and the Icarus snapshots). Also
+include a table that shows the number of contigs, max contig length, and N50 for each step of your
+analysis. Be sure to include text that explains each result (ie say things like “Minia was used to
+assemble overlapping reads from the small insert library into contigs, and the results are shown in
+table 1.”
+
+In addition to presenting the results of each step of the analysis, you should use the final QUAST
+reports to answer the following questions. 
+
+1. Explain why there are two results, and what the ‘broken’ result is (you will have to use the QUAST
+manual).
+2. What fraction of the genome was covered by our scaffolds? (report for in both alignments)
+3. What is the mismatch rate? (report for in both alignments)
+4. How many misassemblies are there? (report for in both alignments)
+5. What are the orange/red scaffolds in the Icarus browser?
+
+*Discussion*:
+Evaluate the success of your assembly. Would you consider it a finished genome? Does the number
+of genes predicted by QUAST for your assembly match the actual number of genes in the “type”
+reference (use NCBI to find the number of actual genes? Do your scaffolds contain complete gene
+sequences?
+What could you do to improve your assembly, and properly connect those final ~1000 scaffolds,
+without relying on a reference sequence?
+What was the effect of k-mer length during assembly?
