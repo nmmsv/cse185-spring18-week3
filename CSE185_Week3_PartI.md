@@ -85,7 +85,9 @@ Run the command below on the `frag_1` data. Use a k-mer sizes of 31.
 jellyfish count -m 31 -s 10000000 -o 31 -C ../../public/week3/frag_1.fastq 
 ```
 
-Run the command below to make a histogram file. 
+This might take a while. You can get started on the recommended reading while you're waiting.
+
+Once the command is finished, run the command below to make a histogram file. 
 ```shell
 jellyfish histo 31 > 31.histo
 ```
@@ -93,3 +95,35 @@ jellyfish histo 31 > 31.histo
 Cat the histo files and take a look. On the left is a list of the bins (the number of times a k-mer occurs
 or its ‘depth’), and on the right is the count for the number of k-mers in the data that fit into that
 category. 
+
+## 3. Plot the k-mer histograms in python
+
+The k-mer distribution is easier to understand if we actually visualize it. For this, we will use the
+programming language python to make plots of each histogram. (Note, you're welcome to use another language like R to plot).
+
+Start IPython by typing:
+```
+ipython
+```
+
+First we'll load `pandas`, a popular library for manipulating tables of data in python, and `matplotlib` for creating plots:
+
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+Now load the data and create a histogram. Note there are many resources online to learn more about plotting with python. These commands will get you started, but you're welcome to try and figure out how to make the default plots prettier.
+
+```python
+plt.figure()
+r31 = pd.read_csv("31.histo", sep=" ", names=["kmercount", "number"])
+plt.bar(r31.iloc[0:100,]["kmercount"], r31.iloc[0:100,]["number"]);
+plt.show()
+plt.savefig("frag_1_31.pdf")
+```
+
+Exit Ipython by typing `ctrl-D` and answering `y` to the prompt asking if you want to exit. When you exit, you should see a pdf file in your working directory. Use `scp` to open it on your desktop; save it for your lab report, and answer the IClicker question.
+
+Reopen the actual `.histo` file with cat, and find the bin (“number of times that k-mer appears”) that
+corresponds to small valley in the figure. Record this “initial valley point” in your lab notebook. 
