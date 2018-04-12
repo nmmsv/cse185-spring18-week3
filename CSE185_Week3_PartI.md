@@ -245,22 +245,19 @@ minia \
   -out outprefix
 ```
 
-As your results come in, add them to the spread sheet on the board. For your lab report, you will make a plot of kmer size vs assembly success (We’ll summarize and post the data you need next time). You will be
-performing additional analysis on either your assembly or the best assembly from your group. 
-
 ## 7. Analyze your contigs
 
 Examine your (own) assembly. The most important file minia created is the `\*.contigs.fa` file, which is a
 list of each assembled contigs in fasta format. Use head to look at the first few contigs, then use the commands below to gather some basic statistics on how `minia` did. How many contigs are there? (Fasta files have 2 lines per sequence). Record the answer in your notebook. 
 
-```shell
+```
 wc -l minia_out.contigs.fa
 ```
 
 What is the longest contig? The shortest? This command will get you one of them, edit it to get you
 the other, and record both in your notebook. 
 
-```shell
+```
 cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | head 
 ```
 
@@ -268,15 +265,19 @@ cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | head
 **UNIX TIP**: datamash (https://www.gnu.org/software/datamash/) is a really useful tool for computing simple operations on columns of data. Below is an example of how to do the command 
 </div>
 
-```shell
+```
 cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | min 1 max 1
 ```
 
 What is the distribution of cotigs? 
 
-```shell
+```
 cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | uniq -c > contiglengths.histo
 ```
+
+As your results come in, add them to the spread sheet on the board. For your lab report, you will make a plot of kmer size vs assembly success (We’ll summarize and post the data you need next time). You will be
+performing additional analysis on either your assembly or the best assembly from your group. 
+
 
 Use Python to plot the histogram. Use `scp` to take a look at the pdf. Many of the contigs are very small, but a few are quite long. 
 
