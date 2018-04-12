@@ -69,6 +69,36 @@ quality trimming improved your assembly, use the quality trimmed short jump file
 want to do quality trimming on the original files. You will have to `mv` the original files (`frag_1.fastq`,
 `frag_2.fastq`) to your Thursday directory. 
 
+Like SSPACE, GapFiller requires a library file. GapFiller is from the same developer as SSPACE, so it
+follows the same format. 
+
+```
+emacs GapFiller_library
+```
+
+*example library file*
+```
+Lib1 aligner file1.fastq file2.fastq insertsize sizeerror orientation
+Lib1 aligner file1.fastq file2.fastq insertsize sizeerror orientation
+```
+
+Make sure that the library file, the files listed in the library file, and the final.scaffolds.fasta file from
+sspace are in the same directory.
+
+Run the GapFiller script with the `-i` option set to 2 (This limits the number of iterations the program
+runs through, otherwise it keeps going until no more gaps can be closed. Each iteration takes about 5
+minutes, and there are diminishing returns after the first few, so we won’t get greedy). Set `-b` as the
+prefix for your output files. 
+
+```
+GapFiller.pl -l GapFiller_lib -s sspace.final.scaffolds.fasta -i 2 -b GapFiller
+```
+
+Open the summary file and record the number of scaffolds, the max scaffold size, and the N50 before
+and after gap closing. Use head -100 to open the `*.gapfilled.final.fa` file. This contains a list of your
+finished scaffolds. Look at the first scaffold. Where do you think the N’s come from? You will need to
+answer this for your report. 
+
 ## 11. Evaluate your assembly
 Even though we were unable to link every stretch of DNA together into a finished genome, we were still able to produce lots of sequences, which could be used for gene finding, comparison to related  bacteria, or as a guide for designing additional sequencing projects to fill in the gaps and link the remaining contigs. 
 
