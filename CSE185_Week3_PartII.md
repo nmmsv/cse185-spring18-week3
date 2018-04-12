@@ -62,3 +62,17 @@ Run `SSPACE` again, this time using the trimmed data in the library file. Be sur
 Examine the summary file and again record the number of scaffolds, the max scaffold length, and the N50. Which scaffolding was better? The one with the raw data, or the one with the trimmed data?
 
 ## 10. Try to close the gaps in the scaffolds. 
+Now that we’ve linked the contigs together into longer stretches of sequence, we can try to improve things even further, by aligning our original reads to the scaffolds, and using them to fill in some of the gaps. We’ll try this with both our original (101 bp, 180 insert) and short jump reads.
+
+Make a *new library file*, in the same format as before, but this time include the original reads as well. If
+quality trimming improved your assembly, use the quality trimmed short jump file, and decide if you
+want to do quality trimming on the original files. You will have to `mv` the original files (`frag_1.fastq`,
+`frag_2.fastq`) to your Thursday directory. 
+
+## 11. Evaluate your assembly
+Even though we were unable to link every stretch of DNA together into a finished genome, we were still able to produce lots of sequences, which could be used for gene finding, comparison to related  bacteria, or as a guide for designing additional sequencing projects to fill in the gaps and link the remaining contigs. 
+
+For today, since we are using raw data from a genome that is actually already solved, we can align
+our contigs to that reference to evaluate our de novo assembly performance. Remember, if we were
+trying to solve the genome of a new or unknown organism, we wouldn’t be able to do this, but we
+could try using a close relative.
