@@ -183,3 +183,120 @@ your lab report. Answer the <font color="blue">i>Clicker question</font>.
 
 Run `fastqc` on the corrected files and compare the results to the initial report. Include the per-base
 sequence quality in your lab report. 
+
+## 5. Collect data on corrected reads, calculate genome size
+
+Use `wc -l` on the corrected fastq files to see how many reads are left. 
+
+Open the corrected histogram and find where the new “valley point” is. Record this in your lab
+notebook. Also, record the multiplicity (or bin) of the first “peak” after that valley.
+
+In addition to replacing basecalls that are likely erroneous, `Corrector_HA` also trimmed data with
+particularly low quality scores. We will need to know the average read length of our corrected files, so
+use the `awk` command below on the corrected data to calculate it for each corrected file, record the
+results, then average the two results.
+
+```shell
+awk 'NR%4==2{sum+=length($0)}END{print sum/(NR/4)}' input.fastq
+```
+
+We also need to know the total number of bases in each corrected file. Modify the `awk` command
+above so that it will output the total number of bases in all the reads. Record the results for each file in
+your notebook, then add them together to get the total number of bases. 
+
+Use the peak bin you identified, and the numbers you just calculated, to estimate the genome size of
+our bacteria with the following formulas:
+
+N = (M*L)/(L-K+1)
+Genome_size = T/N
+
+(N: Depth of coverage, M: Kmer peak, K: Kmer-size, L: avg readlength T: Total bases)
+
+Record the genome size, as we will use it during contig assembly. 
+
+## 6. Assemble reads with minia
+
+Now we are ready to start assembling our reads. Unfortunately, while `SOAPdenovo2` is still a widely
+used tool for denovo assembly, it is too much of a memory hog to run on our ieng6 servers. So we will
+use a lightweight program called minia instead. 
+
+`minia` needs a list of our files as input, so use emacs to make a list like before, with one line listing each
+of the *corrected* files.
+
+The minia command takes the format shown below (all on one line). Use the data we collected about
+the corrected reads in section 5 to figure out how to specify each of this parameters. Choose any
+output prefix you like. 
+
+*The most important parameter is the kmer size*. From our jellyfish histogram of the corrected data, we
+know that a kmer of 31 produces a defined ‘true-reads’ peak, and we know where the valley is. 
+
+However, other kmers may results in better assemblies. Find at least two partners to share data with,
+and between you, try the minia assembly with kmer values between 27 and 43, as well as 31. Minia
+takes a long time, so each person can only use one kmer size. One person in the group must use
+kmer size 31.
+
+For the other k-mer sizes, use the two jelly fish commands to make a histogram and find out if the
+‘valley point’ has changed. For the minia command, you only want to use k-mers with abundance
+higher than this valley point. 
+
+```shell
+minia \
+  -in correctedlist \
+  -kmer-size kmer_size \
+  -abundance-min min_abundance \
+  -out outprefix
+```
+
+This command will take about 15 minutes, but it has very verbose output, so you should be able to
+see it continually chugging along. While you’re waiting, answer the <font color="blue">i>Clicker question.</font>
+As your results come in, add them to the spread sheet on the board. For your lab report, you will
+make a plot of kmer size vs assembly success (I’ll summarize the data you need next time). You will be
+performing additional analysis on either your assembly or the best assembly from your group. 
+
+## 7. Analyze your contigs
+
+Examine your (own) assembly. The most important file minia created is the `\*.contigs.fa` file, which is a
+list of each assembled contigs in fasta format. Use head to look at the first few contigs, then use the commands below to gather some basic statistics on how `minia` did. How many contigs are there? (Fasta files have 2 lines per sequence). Record the answer in your notebook. 
+
+```shell
+wc -l minia_out.contigs.fa
+```
+
+What is the longest contig? The shortest? This command will get you one of them, edit it to get you
+the other, and record both in your notebook. 
+
+```shell
+cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | head 
+```
+
+<div class="alert alert-block alert-info">
+**UNIX TIP**: datamash (https://www.gnu.org/software/datamash/) is a really useful tool for computing simple operations on columns of data. Below is an example of how to do the command 
+</div>
+
+```shell
+cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | min 1 max 1
+```
+
+What is the distribution of cotigs? 
+
+```shell
+cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | uniq -c > contiglengths.histo
+```
+
+Use Python to plot the histogram. Use `scp` to take a look at the pdf. Many of the contigs are very small, but a few are quite long. 
+
+Use a web tool, called QUAST (QUality ASsesment Tool for genome assemblies) to get some more
+metrics on your contigs. First, use `scp` to transfer the `\*contgs.fa` file to your desktop. Then go to  http://quast.bioinf.spbau.ru and follow these steps:
+
+* Upload your contig file, and type 100 in the “skip contigs shorter than” box. 
+* Check find genes (prokaryotic).
+* Leave the genome as unknown. 
+* Make the caption something useful, like minia_greaterthan_99
+* Type in your email so that you can access the report at any time. 
+* Then click Evaluate. 
+
+**One your report is submitted, you are free to go. We will look at the QUAST output next time,
+and we will try to link our contigs into longer pieces of genome with a technique called
+scaffolding.**
+
+**Acknowledgements: Adapted from a lab originally written by Dr. Katie Petrie**
