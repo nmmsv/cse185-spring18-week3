@@ -38,3 +38,11 @@ You will have to specify the aligner (use `bowtie`), the insert size, the tolera
 SSPACE_Standard_v3.0.pl -l libraryfile -s minia_out.contigs.fa -z 100 -v 1 -p 1 -b output_scaffold_prefix
 ```
 
+* `-l` specifies the library file
+* `-s` specifies the list of contigs that `minia` produced
+* `-z` sets the minimum required size for contigs (anything shorter than this will be discarded)
+* `-p` tells the program to make a dot file, which can be used to visualize the scaffold
+* `-v` sets verbose output
+* `-b` sets the base file name for the output directory and the files in it.
+
+After the command runs, `cd` into the directory it created, and open the summary file. Record how many scaffolds there are “After scaffolding”, the max scaffold size, and the N50. (This is also where you can get those numbers for your original contig file, under “Inserted contig file”).
