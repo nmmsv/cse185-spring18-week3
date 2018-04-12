@@ -11,3 +11,13 @@ the full plot later.
 Did k-mer size influence the success of the assembly? Answer in your lab report discussion.
 
 Take a look at your quast results page. If you don’t have one, use the example results linked to in the spreadsheet. Click on the small link that says “Icarus: contig browser” near the top of the results, and use the browser to answer the IClicker question. 
+
+## 8. Use short jump library to scaffold minia contigs. 
+These short contigs are certainly not a complete genome. Even if they cover all of the sequence in our genome (they might not; there could be missing regions), we do not know the correct order to put them in to reconstitute the real genome sequence.
+
+Fortunately, we can use a second set of DNA sequencing data to help us figure out the correct way to join the contigs together. Our contigs were initially made by stitching together 101 bp reads from DNA fragments that were 180 bp long. Our second DNA library (short jump) consists of paired 37 bp reads from DNA fragments that were 3500 bp long. You will map these short jumps to your set of contigs.
+
+If the forward member of a pair binds to one contig, and its reverse partner binds to a different contig, we know that those positions must be ~3500 bp apart in the actual genome. By combining all of the mapping data from these pairs, scaffolding software can figure out the optimal, correct way to link the contigs together.
+
+You will use the program SSPACE for scaffolding. First, it will use the `bowtie` aligner (within the program) to map the shortjump reads to your `minia` contigs. Then, it will use those mapping results to connect the contigs into bigger scaffolds. Today you will generate a lot of new files, so make a subdirectory in your `week4` folder called
+“Thursday.” (no need to commit these files to github). Copy the `contig.fa` file from minia to this subdirectory. Also, move the `shortjump_1` and `shortjump_2` files to this directory. 
