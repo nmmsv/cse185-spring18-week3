@@ -1,4 +1,4 @@
-# Week 4: Where do all these reference sequences come from, anyway? (part 1)
+# Week 4: Where do all these reference sequences come from, anyway? (part 2)
 Skills covered: contig assembly, scaffolding, assembly evaluation
 
 ## 7. Compare contig assembly results with the rest of class
