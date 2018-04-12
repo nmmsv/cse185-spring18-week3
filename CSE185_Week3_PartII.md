@@ -21,7 +21,7 @@ If the forward member of a pair binds to one contig, and its reverse partner bin
 
 You will use the program `SSPACE` for scaffolding. First, it will use the `bowtie` aligner (within the program) to map the shortjump reads to your `minia` contigs. Then, it will use those mapping results to connect the contigs into bigger scaffolds. Today you will generate a lot of new files, so make a subdirectory in your `week4` folder called “Thursday.” (no need to commit these files to github). Copy the `contig.fa` file from minia to this subdirectory. Also, move the `shortjump_1` and `shortjump_2` files to this directory. 
 
-`SSPACE` requires a library file, telling the program the names of our `short_jump` files and some other information about them. Use `emacs` to create a new file with the general format below. You will have to look at the SSPACE user manual to figure out exactly what each column means. 
+`SSPACE` requires a library file, telling the program the names of our `short_jump` files and some other information about them. Use `emacs` to create a new file with the general format below. You will have to look at the SSPACE user manual to figure out exactly what each column means (https://github.com/nsoranzo/sspace_basic/blob/master/F132-01%20SSPACE_Basic_User_Manual_v2.0.pdf). 
 
 ```
 emacs sspace_library
@@ -29,7 +29,7 @@ emacs sspace_library
 
 *Example library file:*
 ```
-Lib1 aligner file1.fastq file2.fastq insertsize sizeerror orientation 
+Lib1 file1.fastq file2.fastq insertsize sizeerror orientation 
 ```
 
 You will have to specify the aligner (use `bowtie`), the insert size, the tolerable error for the insert size, and the orientation. Once you’ve made the library file, run `SSPACE` with the command below, which you will have to edit according to your exiting file names and your output name preference. A description of what each flag is doing follows the command.
