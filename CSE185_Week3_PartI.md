@@ -284,8 +284,9 @@ metrics on your contigs. First, use `scp` to transfer the `*contgs.fa` file to y
 * Type in your email so that you can access the report at any time. 
 * Then click Evaluate. 
 
-**One your report is submitted, you are free to go. We will look at the QUAST output next time,
-and we will try to link our contigs into longer pieces of genome with a technique called
+Once your report has finished, record the N50 value for your kmer size in the spreadsheet.
+
+**That's it for today. Next time we will try to link our contigs into longer pieces of genome with a technique called
 scaffolding.**
 
 **Acknowledgements: Adapted from a lab originally written by Dr. Katie Petrie**
