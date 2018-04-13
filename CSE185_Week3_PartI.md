@@ -63,6 +63,9 @@ git push
 **UNIX/GIT TIP**: If you make changes to your lab notebook or report directly from the web browser, and want to update your local repository on `ieng6` with those changes, you can use "git pull" to see the updates.
 </blockquote>
 
+<blockquote>
+**UNIX/GIT TIP**: We will often be dealing with a lot of files, and not all of these make sense to track with git. In general, git is great for tracking code or small text (or markdown) files. You can also store figure files (e.g. pngs of screenshots). On the other hand, don't add any data files, like fastqs or BAMs. 
+</blockquote>
 
 ## 2. Use jellyfish to make k-mer histograms for the "frag" library
 
