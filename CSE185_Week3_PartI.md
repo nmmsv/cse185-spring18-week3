@@ -56,11 +56,11 @@ git push
 ```
 
 <blockquote>
-**UNIX TIP**: Save your work frequently! It is a good idea to type "ctrl-x ctrl-s" (if using Emacs) often (I do it subconsciously) to make sure you don't lose your work. If you are using Emacs and by chance forgot to save your work before exiting, you can often find the unsaved changes in a temporary file ending with a "~" in the same directory.
+**UNIX TIP**: Save your work frequently! It is a good idea to type "ctrl-x ctrl-s" (if using Emacs) often (I do it subconsciously literally every minute or so) to make sure you don't lose your work. If you are using Emacs and by chance forgot to save your work before exiting, you can often find the unsaved changes in a temporary file ending with a "~" in the same directory.
 </blockquote>
 
 <blockquote>
-**UNIX/GIT TIP**: If you make changes to your lab notebook or report directly from the web browser, and want to update your local repository on `ieng6` with those changes, you can use "git pull" to see the updates.
+**UNIX/GIT TIP**: If you make changes to your lab notebook or report directly from the web browser, and want to update your local repository on ieng6 with those changes, you can use "git pull" to see the updates.
 </blockquote>
 
 <blockquote>
@@ -90,7 +90,7 @@ Run the command below on the `frag_1` data. Use a k-mer sizes of 31.
 jellyfish count -m 31 -s 10000000 -o 31 -C frag_1.fastq 
 ```
 
-This might take a while. You can get started on the recommended reading while you're waiting.
+This might take a while. You can get started on the recommended reading while you're waiting for this and other commands below.
 
 Once the command is finished, run the command below to make a histogram file. 
 ```shell
@@ -98,7 +98,7 @@ jellyfish histo 31 > 31.histo
 ```
 
 Cat the histo files and take a look. On the left is a list of the bins (the number of times a k-mer occurs
-or its ‘depth’), and on the right is the count for the number of k-mers in the data that fit into that
+or its "depth"), and on the right is the count for the number of k-mers in the data that fit into that
 category. 
 
 ## 3. Plot the k-mer histograms in python
@@ -130,7 +130,7 @@ plt.savefig("frag_1_31.pdf")
 
 Exit Ipython by typing `ctrl-D` and answering `y` to the prompt asking if you want to exit. When you exit, you should see a pdf file in your working directory. Use `scp` to open it on your desktop; save it for your lab report, and answer the IClicker question.
 
-Reopen the actual `.histo` file with cat, and find the bin (“number of times that k-mer appears”) that
+Reopen the actual `.histo` file with `cat`, and find the bin (“number of times that k-mer appears”) that
 corresponds to small valley in the figure. Record this “initial valley point” in your lab notebook and answer the IClicker question.
 
 ## 4.  K-mer based error correction
@@ -151,7 +151,7 @@ Run error correction on the `frag_1.fastq` and `frag_2.fastq` files together. He
 emacs filelist
 ```
 
-After you type in the file names, type `ctrl-x ctrl-s` to save and `ctrl-x ctrl-c` to exit. You may want to add this file to your "gitignore" file so it won't be tracked by git.
+After you type in the file names, type `ctrl-x ctrl-s` to save and `ctrl-x ctrl-c` to exit. 
 
 First run the `Kmer_FreqHA` command, which is part of the `SOAPdenovo2` package. Check the
 commands usage page to figure out how to set the `-L` option. Replace the prefix with something
@@ -184,7 +184,7 @@ jellyfish histo 31corrected > 31corrected.histo
 ```
 
 Use Python again to make a PDF of the histogram, and include both pdfs (before and after correction) in
-your lab report. 
+your lab report. Answer the IClicker question before moving on.
 
 ## 5. Collect data on corrected reads, calculate genome size
 
@@ -214,7 +214,7 @@ Genome_size = T/N
 
 (N: Depth of coverage, M: Kmer peak, K: Kmer-size, L: avg readlength T: Total bases)
 
-Record the genome size, as we will use later it during contig assembly. 
+Record the genome size, as we will use later it during contig assembly. Answer the IClicker question. 
 
 ## 6. Assemble reads with minia
 
@@ -251,7 +251,7 @@ minia \
 ## 7. Analyze your contigs
 
 Examine your (own) assembly. The most important file minia created is the `*.contigs.fa` file, which is a
-list of each assembled contigs in fasta format. Use head to look at the first few contigs, then use the commands below to gather some basic statistics on how `minia` did. How many contigs are there? (Fasta files have 2 lines per sequence). Record the answer in your notebook. 
+list of each assembled contigs in fasta format. Use head to look at the first few contigs, then use the commands below to gather some basic statistics on how `minia` did. How many contigs are there? (most fasta files have 2 lines per sequence). Record the answer in your notebook. 
 
 ```
 wc -l minia_out.contigs.fa
@@ -264,23 +264,15 @@ the other, and record both in your notebook.
 cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -n | head 
 ```
 
-<div class="alert alert-block alert-info">
-**UNIX TIP**: datamash (https://www.gnu.org/software/datamash/) is a really useful tool for computing simple operations on columns of data. Below is an example of how to do the command 
-</div>
+<blockquote>
+**UNIX**: datamash is a really useful tool for computing simple operations on columns of data. Below is an example of how to do the command 
+</blockquote>
 
 ```
 cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | datamash min 1 max 1
 ```
 
 As your results come in, add them to the spread sheet on the board. For your lab report, you will make a plot of kmer size vs assembly success (We’ll summarize and post the data you need next time). You will be performing additional analysis on either your assembly or the best assembly from your group. 
-
-What is the distribution of contig lengths? 
-
-```
-cat minia_out.contigs.fa | awk 'NR%2==0{print length}' | sort -g | uniq -c > contiglengths.histo
-```
-
-Use Python to plot the histogram. Use `scp` to take a look at the pdf. Many of the contigs are very small, but a few are quite long. 
 
 Use a web tool, called QUAST (QUality ASsesment Tool for genome assemblies) to get some more
 metrics on your contigs. First, use `scp` to transfer the `*contgs.fa` file to your desktop. Then go to  http://quast.bioinf.spbau.ru and follow these steps:
