@@ -214,7 +214,7 @@ Genome_size = T/N
 
 (N: Depth of coverage, M: Kmer peak, K: Kmer-size, L: avg readlength T: Total bases)
 
-Record the genome size, as we will use later it during contig assembly. Answer the IClicker question. 
+Record the genome size and answer the IClicker question. 
 
 ## 6. Assemble reads with minia
 
