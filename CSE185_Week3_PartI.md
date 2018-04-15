@@ -216,7 +216,7 @@ Genome_size = T/N
 
 Recall that we calculated the kmer distribution using only the first pairs, so only use numbers for the first fastq file. Record the calculated genome size.
 
-The actual length of the Staph aureus genome is around 3 million bp. How close were you?
+The actual length of the Staph aureus genome is around 3 million bp. How close were you? If you didn't that (which we didn't), hypothesize why you might have over or under estimated the genome size. 
 
 ## 6. Assemble reads with minia
 
