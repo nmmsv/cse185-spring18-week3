@@ -153,7 +153,7 @@ emacs filelist
 
 After you type in the file names, type `ctrl-x ctrl-s` to save and `ctrl-x ctrl-c` to exit. 
 
-First run the `Kmer_FreqHA` command, which is part of the `SOAPdenovo2` package. Check the
+First run the `KmerFreqHA` command, which is part of the `SOAPdenovo2` package. Check the
 commands usage page to figure out how to set the `-L` option. Replace the prefix with something
 memorable, like "corrected":
 
@@ -184,19 +184,19 @@ jellyfish histo 31corrected > 31corrected.histo
 ```
 
 Use Python again to make a PDF of the histogram, and include both pdfs (before and after correction) in
-your lab report. Answer the IClicker question before moving on.
+your lab report. 
 
 ## 5. Collect data on corrected reads, calculate genome size
 
 Use `wc -l` on the corrected fastq files to see how many reads are left. 
 
 Open the corrected histogram and find where the new “valley point” is. Record this in your lab
-notebook. Also, record the multiplicity (or bin) of the first “peak” after that valley.
+notebook. Also, record the multiplicity (or bin) of the first “peak” after that valley. Answer the IClicker question before moving on. 
 
 In addition to replacing basecalls that are likely erroneous, `Corrector_HA` also trimmed data with
 particularly low quality scores. We will need to know the average read length of our corrected files, so
 use the `awk` command below on the corrected data to calculate it for each corrected file, record the
-results, then average the two results.
+results.
 
 ```shell
 awk 'NR%4==2{sum+=length($0)}END{print sum/(NR/4)}' input.fastq
@@ -204,7 +204,7 @@ awk 'NR%4==2{sum+=length($0)}END{print sum/(NR/4)}' input.fastq
 
 We also need to know the total number of bases in each corrected file. Modify the `awk` command
 above so that it will output the total number of bases in all the reads. Record the results for each file in
-your notebook, then add them together to get the total number of bases. 
+your notebook. 
 
 Use the peak bin you identified, and the numbers you just calculated, to estimate the genome size of
 our bacteria with the following formulas:
@@ -214,7 +214,7 @@ Genome_size = T/N
 
 (N: Depth of coverage, M: Kmer peak, K: Kmer-size, L: avg readlength T: Total bases)
 
-Record the genome size and answer the IClicker question. 
+Recall that we calculated the kmer distribution using only the first pairs, so only use numbers for the first fastq file. Record the calculated genome size.
 
 ## 6. Assemble reads with minia
 
