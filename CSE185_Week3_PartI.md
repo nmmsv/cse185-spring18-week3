@@ -90,7 +90,7 @@ Run the command below on the `frag_1` data. Use a k-mer sizes of 31.
 jellyfish count -m 31 -s 10000000 -o 31 -C frag_1.fastq 
 ```
 
-This might take a while. You can get started on the recommended reading while you're waiting for this and other commands below.
+This might take a while. You can get started on the reading assignment while you're waiting for this and other commands below.
 
 Once the command is finished, run the command below to make a histogram file. 
 ```shell
