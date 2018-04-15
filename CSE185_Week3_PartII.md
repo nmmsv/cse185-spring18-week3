@@ -142,6 +142,6 @@ Evaluate the success of your assembly. Would you consider it a finished genome? 
 of genes predicted by QUAST for your assembly match the actual number of genes in the “type”
 reference (use NCBI to find the number of actual genes? Do your scaffolds contain complete gene
 sequences?
-What could you do to improve your assembly, and properly connect those final ~1000 scaffolds,
+What could you do to improve your assembly, and properly connect those final scaffolds,
 without relying on a reference sequence?
 What was the effect of k-mer length during assembly?
