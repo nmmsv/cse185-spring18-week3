@@ -124,8 +124,8 @@ Now load the data and create a histogram. Note there are many resources online t
 plt.figure()
 r31 = pd.read_csv("31.histo", sep=" ", names=["kmercount", "number"])
 plt.bar(r31.iloc[1:100,]["kmercount"], r31.iloc[1:100,]["number"]);
-plt.show()
 plt.savefig("frag_1_31.pdf")
+plt.show()
 ```
 
 Exit Ipython by typing `ctrl-D` and answering `y` to the prompt asking if you want to exit. When you exit, you should see a pdf file in your working directory. Use `scp` to open it on your desktop; save it for your lab report, and answer the IClicker question.
