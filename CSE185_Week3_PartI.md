@@ -45,7 +45,7 @@ emacs .gitignore
 ```
 And add the following lines:
 ```
-*.html
+*.fastq
 *.zip
 ```
 Type `ctrl-x ctrl-s` to save and `ctrl-x ctrl-c` to exit. Now add the gitignore file, commit, and push your changes:
