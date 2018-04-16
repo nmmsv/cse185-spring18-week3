@@ -1,4 +1,4 @@
-# Week 4: Where do all these reference sequences come from, anyway? (part 1)
+# Week 3: Where do all these reference sequences come from, anyway? (part 1)
 Skills covered: contig assembly, scaffolding, assembly evaluation, plotting
 
 Today, you will assemble next generation sequencing reads into a complete genome. On Thursday,
